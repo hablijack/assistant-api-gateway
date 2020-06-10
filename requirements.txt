@@ -1,0 +1,9 @@
+feedparser
+lxml
+apscheduler
+Flask
+requests
+bs4
+gevent
+dateparser
+-e git+git://github.com/bmartin5692/sucks.git#egg=sucks
