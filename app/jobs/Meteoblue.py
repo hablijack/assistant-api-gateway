@@ -4,6 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 import logging
+from library.Persistence import Persistence
 
 
 class Meteoblue:
@@ -15,4 +16,4 @@ class Meteoblue:
         page = requests.get('https://www.meteoblue.com/de/wetter/woche/waldershof_deutschland_2815048')
         soup = BeautifulSoup(page.text, 'html.parser')
         report_container = soup.find(class_='report')
-        return report_container.find("p").text
+        Persistence.persist('meteoblue', report_container.find("p").text)

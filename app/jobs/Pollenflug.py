@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from library.Persistence import Persistence
 
 
 class Pollenflug():

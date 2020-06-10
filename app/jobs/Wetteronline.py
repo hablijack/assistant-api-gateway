@@ -4,6 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 import logging
+from library.Persistence import Persistence
 
 
 class Wetteronline:
@@ -18,4 +19,4 @@ class Wetteronline:
         today = report_container[1].text
         report_container = soup.find_all(class_=['tomorrow'])
         tomorrow = report_container[1].text
-        return { 'today': today, 'tomorrow': tomorrow}
+        Persistence.persist('wetteronline',  { 'today': today, 'tomorrow': tomorrow})

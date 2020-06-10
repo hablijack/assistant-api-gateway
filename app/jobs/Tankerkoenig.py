@@ -5,6 +5,7 @@ import requests
 import json
 from library.Configuration import Configuration
 import logging
+from library.Persistence import Persistence
 
 
 class Tankerkoenig():
@@ -21,4 +22,4 @@ class Tankerkoenig():
         tankerkoenig_url = 'https://creativecommons.tankerkoenig.de/json/list.php?lat=' + lati + '&lng=' + longi + '&rad=5&sort=dist&type=all&apikey='
         r = requests.get(tankerkoenig_url + api_key)
         json_obj = json.loads(r.content.decode('utf-8'))
-        return json_obj['stations']
+        Persistence.persist('Tankerkoenig', json_obj['stations'])

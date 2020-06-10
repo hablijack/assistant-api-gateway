@@ -4,6 +4,7 @@
 import imaplib
 from library.Configuration import Configuration
 import logging
+from library.Persistence import Persistence
 
 
 class Posteo():
@@ -22,4 +23,4 @@ class Posteo():
         obj.login(username, password)
         obj.select()
         count = len(obj.search(None, 'UnSeen')[1][0].split())
-        return count
+        Persistence.persist('posteo', {'count': count})

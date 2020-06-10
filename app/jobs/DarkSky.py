@@ -5,6 +5,7 @@ import requests
 import json
 from library.Configuration import Configuration
 import logging
+from library.Persistence import Persistence
 
 
 class DarkSky:
@@ -18,4 +19,4 @@ class DarkSky:
         latitude = config.darksky_waldershof_lat()
         longitude = config.darksky_waldershof_long()
         url = 'https://api.darksky.net/forecast/' + token + '/' + latitude + ',' + longitude + '?lang=de&exclude=minutely,flags,hourly&units=ca'
-        return json.loads(requests.get(url).text)
+        Persistence.persist('darksky', json.loads(requests.get(url).text))  

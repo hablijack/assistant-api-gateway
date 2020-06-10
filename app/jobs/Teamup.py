@@ -7,6 +7,7 @@ import json
 import dateparser
 from library.Configuration import Configuration
 import logging
+from library.Persistence import Persistence
 
 
 class Teamup:
@@ -38,4 +39,4 @@ class Teamup:
                 event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y %H:%M")
             e = event_date_string + " " + event['title']
             agenda.append(e)
-        return agenda
+        Persistence.persist('teamup', agenda)

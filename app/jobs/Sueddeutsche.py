@@ -5,6 +5,7 @@ import re
 import feedparser
 import traceback
 import logging
+from library.Persistence import Persistence
 
 
 class Sueddeutsche():
@@ -17,7 +18,7 @@ class Sueddeutsche():
         try:
             logger.info("getting feed")
             feed = feedparser.parse(headline_url)
-            return feed.entries[0:5]
+            Persistence.persist('sueddeutsche', feed.entries[0:5])
         except Exception as e:
             logger.error("Error: %s. Cannot get news." % e)
-            return {}
+            Persistence.persist('sueddeutsche',  {})

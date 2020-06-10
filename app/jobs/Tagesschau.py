@@ -4,6 +4,8 @@
 import re
 import feedparser
 import logging
+from library.Persistence import Persistence
+
 
 class Tagesschau():
 
@@ -14,4 +16,4 @@ class Tagesschau():
         tagesschau_base_url = 'http://www.tagesschau.de'
         tagesschau_100s_url = '/export/podcast/hi/tagesschau-in-100-sekunden/'
         feed = feedparser.parse(tagesschau_base_url + tagesschau_100s_url)
-        return feed['entries'][0]['links'][0]['href']
+        Persistence.persist('tagesschhau', feed['entries'][0]['links'][0]['href'])

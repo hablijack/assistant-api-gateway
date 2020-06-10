@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import feedparser
 from library.ChefkochRecipe import ChefkochRecipe
 import logging
+from library.Persistence import Persistence
 
 
 class Chefkoch():
@@ -33,4 +34,4 @@ class Chefkoch():
             ingredient = "{} {}".format(col[0].text.strip(), col[1].text.strip())
             ingredient = ingredient.replace("\xa0", "")
             recipe.ingredients.append(ingredient)
-        return recipe
+        Persistence.persist('chefkoch', recipe) 
