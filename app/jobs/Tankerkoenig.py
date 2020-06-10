@@ -20,6 +20,9 @@ class Tankerkoenig():
         api_key = Configuration().tankerkoenig_api_key()
 
         tankerkoenig_url = 'https://creativecommons.tankerkoenig.de/json/list.php?lat=' + lati + '&lng=' + longi + '&rad=5&sort=dist&type=all&apikey='
-        r = requests.get(tankerkoenig_url + api_key)
-        json_obj = json.loads(r.content.decode('utf-8'))
-        Persistence.persist('Tankerkoenig', json_obj['stations'])
+        try:
+            r = requests.get(tankerkoenig_url + api_key)
+            json_obj = json.loads(r.content.decode('utf-8'))
+            Persistence.persist('Tankerkoenig', json_obj['stations'])
+        except Exception as e:
+            logger.error("Error: %s. Cannot get tankerkoenig api." % e)

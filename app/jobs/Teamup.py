@@ -24,19 +24,22 @@ class Teamup:
         end_date = str(datetime.date.today() + datetime.timedelta(days=2))
         url = teamup_url + "/events" + "?startDate=" + start_date + "&endDate=" + end_date
         headers = {'Teamup-Token': teamup_token}
-        req = requests.get(url, headers=headers)
-        events = json.loads(req.text)
-        agenda = []
-        for event in events['events']:
-            if event['subcalendar_id'] == 4377496:
-                # Geburtstage
-                event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
-            elif event['subcalendar_id'] == 4377396:
-                # Feiertage
-                event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
-            else:
-                # Others
-                event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y %H:%M")
-            e = event_date_string + " " + event['title']
-            agenda.append(e)
-        Persistence.persist('teamup', agenda)
+        try:
+            req = requests.get(url, headers=headers)
+            events = json.loads(req.text)
+            agenda = []
+            for event in events['events']:
+                if event['subcalendar_id'] == 4377496:
+                    # Geburtstage
+                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
+                elif event['subcalendar_id'] == 4377396:
+                    # Feiertage
+                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
+                else:
+                    # Others
+                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y %H:%M")
+                e = event_date_string + " " + event['title']
+                agenda.append(e)
+            Persistence.persist('teamup', agenda)
+        except Exception as e:
+            logger.error("Error: %s. Cannot get teamup calendar." % e)

@@ -18,5 +18,8 @@ class DarkSky:
         token = config.darksky_token()
         latitude = config.darksky_waldershof_lat()
         longitude = config.darksky_waldershof_long()
-        url = 'https://api.darksky.net/forecast/' + token + '/' + latitude + ',' + longitude + '?lang=de&exclude=minutely,flags,hourly&units=ca'
-        Persistence.persist('darksky', json.loads(requests.get(url).text))  
+        try:
+            url = 'https://api.darksky.net/forecast/' + token + '/' + latitude + ',' + longitude + '?lang=de&exclude=minutely,flags,hourly&units=ca'
+            Persistence.persist('darksky', json.loads(requests.get(url).text))  
+        except Exception as e:
+            logger.error("Error: %s. Cannot get darksky api." % e)

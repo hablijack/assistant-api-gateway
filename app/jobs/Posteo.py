@@ -18,9 +18,11 @@ class Posteo():
         mailport = 993
         username = config.posteo_username()
         password = config.posteo_password()
-
-        obj = imaplib.IMAP4_SSL(mailhost, mailport)
-        obj.login(username, password)
-        obj.select()
-        count = len(obj.search(None, 'UnSeen')[1][0].split())
-        Persistence.persist('posteo', {'count': count})
+        try:
+            obj = imaplib.IMAP4_SSL(mailhost, mailport)
+            obj.login(username, password)
+            obj.select()
+            count = len(obj.search(None, 'UnSeen')[1][0].split())
+            Persistence.persist('posteo', {'count': count})
+        except Exception as e:
+            logger.error("Error: %s. Cannot get posteo mails." % e)

@@ -16,11 +16,16 @@ class ADAC:
         logger.info("requesting ADAC-API")
         adac_token = Configuration().adac_token()
         adac_50km_radius_rss_url = 'http://routenplaner.adac.de/util/RSSFeed.aspx?type=VerkehrsInfo&param=' + adac_token
-        feed = feedparser.parse(adac_50km_radius_rss_url)
-        incidents = feed['items']
-        traffic_messages = []
-        for incident in incidents:
-            title = BeautifulSoup(incident['title'], 'html.parser')
-            summary = BeautifulSoup(incident['summary'], 'html.parser')
-            traffic_messages.append({'title': str(title), 'summary': str(summary)})
-        Persistence.persist('adac', traffic_messages)
+        try:
+            feed = feedparser.parse(adac_50km_radius_rss_url)
+            incidents = feed['items']
+            traffic_messages = []
+            for incident in incidents:
+                title = BeautifulSoup(incident['title'], 'html.parser')
+                summary = BeautifulSoup(incident['summary'], 'html.parser')
+                traffic_messages.append({'title': str(title), 'summary': str(summary)})
+            Persistence.persist('adac', traffic_messages)
+        except Exception as e:
+            logger.error("Error: %s. Cannot get adac." % e)
+            logger.error()
+

@@ -15,5 +15,8 @@ class Tagesschau():
         logger.info("fetching tagesschau 100s podcast")
         tagesschau_base_url = 'http://www.tagesschau.de'
         tagesschau_100s_url = '/export/podcast/hi/tagesschau-in-100-sekunden/'
-        feed = feedparser.parse(tagesschau_base_url + tagesschau_100s_url)
-        Persistence.persist('tagesschhau', feed['entries'][0]['links'][0]['href'])
+        try:
+            feed = feedparser.parse(tagesschau_base_url + tagesschau_100s_url)
+            Persistence.persist('tagesschhau', feed['entries'][0]['links'][0]['href'])
+        except Exception as e:
+            logger.error("Error: %s. Cannot get tagesschau." % e)

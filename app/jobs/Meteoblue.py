@@ -12,8 +12,11 @@ class Meteoblue:
     @staticmethod
     def fetch():
         logger = logging.getLogger('Meteoblue')
-        logger.info("... requesting meteoblue weather data")
-        page = requests.get('https://www.meteoblue.com/de/wetter/woche/waldershof_deutschland_2815048')
-        soup = BeautifulSoup(page.text, 'html.parser')
-        report_container = soup.find(class_='report')
-        Persistence.persist('meteoblue', report_container.find("p").text)
+        logger.info("requesting meteoblue weather data")
+        try:
+            page = requests.get('https://www.meteoblue.com/de/wetter/woche/waldershof_deutschland_2815048')
+            soup = BeautifulSoup(page.text, 'html.parser')
+            report_container = soup.find(class_='report')
+            Persistence.persist('meteoblue', report_container.find("p").text)
+        except Exception as e:
+            logger.error("Error: %s. Cannot get meteoblue api." % e)
