@@ -20,3 +20,4 @@ class Tagesschau():
             Persistence.persist('tagesschhau', feed['entries'][0]['links'][0]['href'])
         except Exception as e:
             logger.error("Error: %s. Cannot get tagesschau." % e)
+            Persistence.persist('tagesschau',  {})

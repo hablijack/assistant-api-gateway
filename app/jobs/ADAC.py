@@ -27,5 +27,5 @@ class ADAC:
             Persistence.persist('adac', traffic_messages)
         except Exception as e:
             logger.error("Error: %s. Cannot get adac." % e)
-            logger.error()
+            Persistence.persist('adac',  {})
 

@@ -38,3 +38,4 @@ class Chefkoch():
             Persistence.persist('chefkoch', recipe) 
         except Exception as e:
             logger.error("Error: %s. Cannot get chefkoch." % e)
+            Persistence.persist('chefkoch',  {})

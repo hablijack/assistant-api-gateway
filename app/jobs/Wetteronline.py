@@ -23,3 +23,4 @@ class Wetteronline:
             Persistence.persist('wetteronline',  { 'today': today, 'tomorrow': tomorrow})
         except Exception as e:
             logger.error("Error: %s. Cannot get Wetteronline api." % e)
+            Persistence.persist('wetteronline',  {})

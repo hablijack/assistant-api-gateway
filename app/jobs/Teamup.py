@@ -43,3 +43,4 @@ class Teamup:
             Persistence.persist('teamup', agenda)
         except Exception as e:
             logger.error("Error: %s. Cannot get teamup calendar." % e)
+            Persistence.persist('teamup',  {})

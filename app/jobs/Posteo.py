@@ -26,3 +26,4 @@ class Posteo():
             Persistence.persist('posteo', {'count': count})
         except Exception as e:
             logger.error("Error: %s. Cannot get posteo mails." % e)
+            Persistence.persist('posteo',  {})

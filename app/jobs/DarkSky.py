@@ -23,3 +23,4 @@ class DarkSky:
             Persistence.persist('darksky', json.loads(requests.get(url).text))  
         except Exception as e:
             logger.error("Error: %s. Cannot get darksky api." % e)
+            Persistence.persist('darksky',  {})

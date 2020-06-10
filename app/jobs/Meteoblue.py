@@ -20,3 +20,4 @@ class Meteoblue:
             Persistence.persist('meteoblue', report_container.find("p").text)
         except Exception as e:
             logger.error("Error: %s. Cannot get meteoblue api." % e)
+            Persistence.persist('meteoblue',  {})

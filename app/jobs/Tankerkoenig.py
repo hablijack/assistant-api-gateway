@@ -23,6 +23,7 @@ class Tankerkoenig():
         try:
             r = requests.get(tankerkoenig_url + api_key)
             json_obj = json.loads(r.content.decode('utf-8'))
-            Persistence.persist('Tankerkoenig', json_obj['stations'])
+            Persistence.persist('tankerkoenig', json_obj['stations'])
         except Exception as e:
             logger.error("Error: %s. Cannot get tankerkoenig api." % e)
+            Persistence.persist('tankerkoenig',  {})
