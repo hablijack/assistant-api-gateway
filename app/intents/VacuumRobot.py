@@ -3,7 +3,6 @@
 
 from sucks import *
 from library.Configuration import Configuration
-from lib.Ecovacs import Ecovacs
 import logging
 
 
