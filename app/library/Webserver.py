@@ -18,49 +18,9 @@ class Webserver():
         self.http_server.serve_forever()
 
     @staticmethod
-    @app.route('/traffic')
-    def adac():
-        return Persistence.read('adac')
-    
-    @staticmethod
-    @app.route('/recipe')
-    def chefkoch():
-        return Persistence.read('chefkoch')
-
-    @staticmethod
-    @app.route('/vaccuum/cleanup')
-    def ecovacs():
-        return {}
-
-    @staticmethod
-    @app.route('/weather')
-    def weather():
-        return Persistence.read('wetteronline')
-
-    @staticmethod
-    @app.route('/mails')
-    def posteo():
-        return Persistence.read('posteo')
-
-    @staticmethod
-    @app.route('/news')
-    def sueddeutsche():
-        return Persistence.read('sueddeutsche')
-
-    @staticmethod
-    @app.route('/newspodcast')
-    def tagesschau():
-        return Persistence.read('tagesschau')
-
-    @staticmethod
-    @app.route('/gasprice')
-    def tankerkoenig():
-        return Persistence.read('tankerkoenig')
-
-    @staticmethod
-    @app.route('/calendar')
-    def teamup():
-        return Persistence.read('teamup')
+    @app.route('/intent')
+    def intent_handling():
+        return { "speech": { "text": "Die Sprachausgabe funktioniert!"}}
 
     @staticmethod
     @app.route('/health')
