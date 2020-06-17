@@ -18,7 +18,7 @@ class Webserver():
         self.http_server.serve_forever()
 
     @staticmethod
-    @app.route('/intent')
+    @app.route('/intent', methods=['POST'])
     def intent_handling():
         return { "speech": { "text": "Die Sprachausgabe funktioniert!"}}
 
