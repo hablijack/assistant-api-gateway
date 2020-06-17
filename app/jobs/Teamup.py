@@ -27,20 +27,7 @@ class Teamup:
         try:
             req = requests.get(url, headers=headers)
             events = json.loads(req.text)
-            agenda = []
-            for event in events['events']:
-                if event['subcalendar_id'] == 4377496:
-                    # Geburtstage
-                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
-                elif event['subcalendar_id'] == 4377396:
-                    # Feiertage
-                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y")
-                else:
-                    # Others
-                    event_date_string = dateparser.parse(event['start_dt']).strftime("%d.%m.%y %H:%M")
-                e = event_date_string + " " + event['title']
-                agenda.append(e)
-            Persistence.persist('teamup', agenda)
+            Persistence.persist('teamup', events['events'])
         except Exception as e:
             logger.error("Error: %s. Cannot get teamup calendar." % e)
             Persistence.persist('teamup',  {})

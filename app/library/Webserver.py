@@ -4,7 +4,7 @@
 from flask import Flask, request, render_template, Response, send_from_directory, jsonify
 from gevent.pywsgi import WSGIServer
 from library.Configuration import Configuration
-from library.Persistence import Persistence
+from library.Brain import Brain
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ class Webserver():
     @staticmethod
     @app.route('/intent', methods=['POST'])
     def intent_handling():
-        return { "speech": { "text": "Die Sprachausgabe funktioniert!"}}
+        return Brain().execute_command_by_spoken_words(request.data.intent, request.data.text)
 
     @staticmethod
     @app.route('/health')
