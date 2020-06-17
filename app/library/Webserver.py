@@ -20,7 +20,8 @@ class Webserver():
     @staticmethod
     @app.route('/intent', methods=['POST'])
     def intent_handling():
-        return Brain().execute_command_by_spoken_words(request.data.intent, request.data.text)
+        data = request.get_json()
+        return Brain().execute_command_by_spoken_words(data.intent, data.text)
 
     @staticmethod
     @app.route('/health')
