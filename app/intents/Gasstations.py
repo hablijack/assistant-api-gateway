@@ -12,7 +12,7 @@ def handle(text):
     if "Diesel" in text:
         gastype = "diesel"
     elif "Benzin" in text:
-        gastype = "benzin"
+        gastype = "e5"
     cheapest = {gastype: 100.0}
     for station in fuel_prices['stations']:
         if station[gastype] <= cheapest[gastype]:
