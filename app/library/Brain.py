@@ -32,7 +32,7 @@ class Brain:
                 try:
                     self.logger.info("... executing module")
                     answer = module.handle(text)
-                except:
-                    self.logger.error('Error on handling module!')
+                except Exception as e:
+                    self.logger.error("Error: %s on handling module!" % e)
                 break
         return { "speech": { "text": answer } }
