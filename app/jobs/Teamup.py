@@ -27,7 +27,7 @@ class Teamup:
         try:
             req = requests.get(url, headers=headers)
             events = json.loads(req.text)
-            Persistence.persist('teamup', events['events'])
+            Persistence.persist('teamup', events)
         except Exception as e:
             logger.error("Error: %s. Cannot get teamup calendar." % e)
             Persistence.persist('teamup',  {})
