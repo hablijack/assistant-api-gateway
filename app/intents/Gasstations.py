@@ -19,7 +19,7 @@ def handle(text):
             cheapest = station
     response = "Der günstigste {0} kostet gerade: {1}€, bei der Tankstelle {2}.".format(
         gastype,
-        format(cheapest["diesel"], '.2f').replace('.', ','),
+        format(cheapest[gastype], '.2f').replace('.', ','),
         cheapest["name"]
     )
     return response
