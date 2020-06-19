@@ -9,6 +9,7 @@ def handle(text):
     logger = logging.getLogger("CalendarIntent")
     logger.info("... executing Calendar intent")
     calendar = Persistence.read("teamup")
+    agenda = ""
     for event in calendar['events']:
         user_names = []
         TEAMUP_USERS = [
