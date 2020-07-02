@@ -20,7 +20,7 @@ class Teamup:
         teamup_token = config.teamup_token()
 
         start_date = str(datetime.date.today())
-        end_date = str(datetime.date.today() + datetime.timedelta(days=1))
+        end_date = str(datetime.date.today() + datetime.timedelta(days=2))
         url = teamup_url + "/events" + "?startDate=" + start_date + "&endDate=" + end_date
         headers = {'Teamup-Token': teamup_token}
         try:

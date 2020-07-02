@@ -27,11 +27,13 @@ def handle(text):
                 if calendar_id == user["calendar_id"]:
                     user_names.append(user["name"])
                     break
-        
-        if dateparser.parse(event["start_dt"]).date() == datetime.datetime.today().date():
+        parsed_date = dateparser.parse(event["start_dt"]).date()
+        if parsed_date == datetime.datetime.today().date():
             date_str = "heute "
-        else:
+        elif parsed_date == (datetime.date.today() + datetime.timedelta(days=1)).date():
             date_str = "morgen "
+        else:
+            date_str = "übermorgen "
 
         if user_names[0] == "Family":
             user_names[0] = "Barbara"
