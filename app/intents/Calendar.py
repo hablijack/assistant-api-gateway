@@ -4,6 +4,7 @@
 import logging
 from library.Persistence import Persistence
 import datetime
+import dateparser
 
 def handle(text):
     logger = logging.getLogger("CalendarIntent")
@@ -26,18 +27,26 @@ def handle(text):
                 if calendar_id == user["calendar_id"]:
                     user_names.append(user["name"])
                     break
+        
+        if dateparser.parse(event["start_dt"]).date() == datetime.datetime.today().date():
+            date_str = "heute "
+        else:
+            date_str = "morgen "
+
         if user_names[0] == "Family":
             user_names[0] = "Barbara"
             user_names.append("Christoph")
         user_string = " und ".join(user_names)
         if len(user_names) > 1:
-            user_string += " haben heute "
+            user_string += " haben "
         else:
-            user_string += " hat heute "
+            user_string += " hat "
             if user_names[0] == "Müll":
                 trashinfo = True
+
+        user_string += date_str
         if trashinfo:
-            agenda += "Achtung, heute ist: " + event["title"] + "! "
+            agenda += "Achtung, " + date_str + " ist: " + event["title"] + "! "
         else:
             if event["all_day"]:
                 agenda += user_string + "den ganzen Tag " + event["title"] + ". "
@@ -47,7 +56,7 @@ def handle(text):
                 agenda += user_string + "um " + "{0:%H:%M}".format(event_time) + "Uhr " + event['title'] + ". "
         
     if len(calendar['events']) == 0:
-        agenda = "Du hast heute keine Termine mehr."
+        agenda = "Du hast heute und morgen keine Termine mehr."
     return agenda
 
 def is_requested(intent):

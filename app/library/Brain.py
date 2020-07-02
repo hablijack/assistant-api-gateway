@@ -35,4 +35,7 @@ class Brain:
                 except Exception as e:
                     self.logger.error("Error: %s on handling module!" % e)
                 break
-        return { "speech": { "text": answer } }
+        if answer:
+            return { "speech": { "text": answer } }
+        else:
+            return

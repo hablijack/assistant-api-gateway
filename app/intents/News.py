@@ -12,7 +12,7 @@ def handle(text):
     logger.info("... executing News module")
     tagesschau = Persistence.read("tagesschau")
     requests.post("http://192.168.178.52:5000/change", json={"topic": "news", "url": tagesschau['url']})
-    return "Hier ist die aktuelle ARD Tagesschau."
+    return None
 
 def is_requested(intent):
     return ("Tagesschau" == intent)
