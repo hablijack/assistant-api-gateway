@@ -6,7 +6,7 @@ from library.Persistence import Persistence
 import datetime
 import dateparser
 
-def handle(text, scheduler):
+def handle(text, slots, scheduler):
     logger = logging.getLogger("CalendarIntent")
     logger.info("... executing Calendar intent")
     calendar = Persistence.read("teamup")

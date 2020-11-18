@@ -5,7 +5,7 @@ import random
 import logging
 
 
-def handle(text, scheduler):
+def handle(text, slots, scheduler):
     logger = logging.getLogger('HelloIntent')
     logger.info("... executing Hello intent")
     return random.choice(['Hallo! Wie kann ich helfen?', "Hallo!", "Hallo! Stets zu Diensten."])

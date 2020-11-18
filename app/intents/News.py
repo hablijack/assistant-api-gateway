@@ -7,7 +7,7 @@ import requests
 import json
 
 
-def handle(text, scheduler):
+def handle(text, slots, scheduler):
     logger = logging.getLogger('NewsModule')
     logger.info("... executing News module")
     tagesschau = Persistence.read("tagesschau")

@@ -28,6 +28,7 @@ class Brain:
     def execute_command_by_spoken_words(self, speech_data):
         intent = speech_data['intent']['name']
         text = speech_data['text']
+        slots = speech_data['slots']
         self.logger.info(speech_data)
         answer = ""
         for module in self.modules:
@@ -35,7 +36,7 @@ class Brain:
                 self.logger.info("... intent found for: " + intent)
                 try:
                     self.logger.info("... executing module")
-                    answer = module.handle(text, self.scheduler)
+                    answer = module.handle(text, slots, self.scheduler)
                 except Exception as e:
                     self.logger.error("Error: %s on handling module!" % e)
                 break

@@ -5,7 +5,7 @@ import logging
 import datetime
 
 
-def handle(text, scheduler):
+def handle(text, slots, scheduler):
     logger = logging.getLogger('TimeinfoModule')
     logger.info("... executing Timeinfo module")
     now = datetime.datetime.now()
