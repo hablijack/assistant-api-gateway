@@ -5,7 +5,7 @@ import logging
 from library.Persistence import Persistence
 
 
-def handle(text):
+def handle(text, scheduler):
     logger = logging.getLogger('GasstationsIntent')
     logger.info("... executing Gasstations intent")
     fuel_prices = Persistence.read("tankerkoenig")

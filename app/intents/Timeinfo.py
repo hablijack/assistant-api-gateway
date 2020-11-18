@@ -5,11 +5,14 @@ import logging
 import datetime
 
 
-def handle(text):
+def handle(text, scheduler):
     logger = logging.getLogger('TimeinfoModule')
     logger.info("... executing Timeinfo module")
     now = datetime.datetime.now()
-    return "Es ist jetzt " + str(now.hour) + "Uhr und " + str(now.minute) + "Minuten."
+    sentence = "Es ist jetzt " + str(now.hour) + "Uhr"
+    if now.minute > 0:  
+        sentence += " und " + str(now.minute) + "Minuten."
+    return sentence
 
 def is_requested(intent):
     return (intent == "GetTime")

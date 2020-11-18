@@ -54,3 +54,9 @@ class Configuration:
 
     def darksky_waldershof_long(self):
         return os.getenv('DARKSKY_LONG') 
+
+    def fritzbox_ip(self):
+        return os.getenv('FRITZBOX_IP')
+
+    def fritzbox_password(self):
+        return os.getenv('FRITZBOX_PASSWORD') 

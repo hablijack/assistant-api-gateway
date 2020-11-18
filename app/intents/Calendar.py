@@ -6,7 +6,7 @@ from library.Persistence import Persistence
 import datetime
 import dateparser
 
-def handle(text):
+def handle(text, scheduler):
     logger = logging.getLogger("CalendarIntent")
     logger.info("... executing Calendar intent")
     calendar = Persistence.read("teamup")
@@ -30,7 +30,7 @@ def handle(text):
         parsed_date = dateparser.parse(event["start_dt"]).date()
         if parsed_date == datetime.datetime.today().date():
             date_str = "heute "
-        elif parsed_date == (datetime.datetime.date.today() + datetime.datetime.timedelta(days=1)).date():
+        elif parsed_date == (datetime.datetime.today() + datetime.timedelta(days=1)).date():
             date_str = "morgen "
         else:
             date_str = "übermorgen "

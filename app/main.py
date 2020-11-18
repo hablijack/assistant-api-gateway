@@ -3,9 +3,26 @@
 
 from apscheduler.schedulers.background import BackgroundScheduler
 import logging
-
 from library.Scheduler import Scheduler
-from library.Webserver import Webserver
+from library.Configuration import Configuration
+from waitress import serve
+from flask import Flask, request
+from library.Brain import Brain
+
+app = Flask(__name__)
+scheduler = Scheduler()
+
+@app.route('/intent', methods=['POST'])
+def intent_handling():
+    data = request.get_json()
+    print("------------------------ REQUEST PARAM RECEIVED")
+    print(data)
+    print("------------------------------------------------")
+    return Brain(scheduler).execute_command_by_spoken_words(data['intent']['name'], data['text'])
+
+@app.route('/health')
+def health():
+    return {'status': 'UP'}
 
 if __name__ == "__main__":
     logging.basicConfig(
@@ -16,9 +33,5 @@ if __name__ == "__main__":
             logging.StreamHandler()
         ]
     )
-
-    scheduler = Scheduler()
     scheduler.start()
-
-    webserver = Webserver()
-    webserver.serve()
+    serve(app, port=Configuration().app_port())

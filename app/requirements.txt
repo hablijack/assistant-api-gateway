@@ -4,6 +4,7 @@ apscheduler
 Flask
 requests
 bs4
-gevent
+waitress
 dateparser
+fritzconnection
 -e git+git://github.com/bmartin5692/sucks.git#egg=sucks

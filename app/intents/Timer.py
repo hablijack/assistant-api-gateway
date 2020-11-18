@@ -5,7 +5,7 @@ import logging
 import re
 
 
-def handle(text):
+def handle(text, scheduler):
     logger = logging.getLogger('TimerModule')
     logger.info("... executing Timer module")
     answer = ""

@@ -5,7 +5,7 @@ import logging
 from library.Persistence import Persistence
 
 
-def handle(text):
+def handle(text, scheduler):
     logger = logging.getLogger('WeatherModule')
     logger.info("... executing weather module")
     forecast = Persistence.read("wetteronline")

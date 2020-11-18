@@ -13,7 +13,8 @@ command and let domino do the magic.
 
 class Brain:
 
-    def __init__(self):
+    def __init__(self, scheduler):
+        self.scheduler = scheduler
         self.logger = logging.getLogger('Brain')
         self.app_path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir))
         locations = [os.path.join(self.app_path, "intents")]
@@ -31,7 +32,7 @@ class Brain:
                 self.logger.info("... intent found for: " + intent)
                 try:
                     self.logger.info("... executing module")
-                    answer = module.handle(text)
+                    answer = module.handle(text, self.scheduler)
                 except Exception as e:
                     self.logger.error("Error: %s on handling module!" % e)
                 break
