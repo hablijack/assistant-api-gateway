@@ -6,7 +6,7 @@ from library.Configuration import Configuration
 import logging
 
 
-def handle(text, slots, sscheduler):
+def handle(text, slots, scheduler):
     logger = logging.getLogger('VacuumRobotIntent')
     logger.info("... executing vacuum robot intent")
     config = Configuration()

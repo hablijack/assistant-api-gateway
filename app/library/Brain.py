@@ -29,7 +29,6 @@ class Brain:
         intent = speech_data['intent']['name']
         text = speech_data['text']
         slots = speech_data['slots']
-        self.logger.info(speech_data)
         answer = ""
         for module in self.modules:
             if module.is_requested(intent):
