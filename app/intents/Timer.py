@@ -27,4 +27,4 @@ def handle(text, scheduler):
     return answer
 
 def is_requested(intent):
-    return (intent == "GetTimer")
+    return (intent == "Timer")

@@ -25,7 +25,10 @@ class Brain:
             self.modules.append(mod)
         self.modules.sort(key=lambda mod: mod.PRIORITY if hasattr(mod, 'PRIORITY') else 0, reverse=False)
 
-    def execute_command_by_spoken_words(self, intent, text):
+    def execute_command_by_spoken_words(self, speech_data):
+        intent = speech_data['intent']['name']
+        text = speech_data['text']
+        self.logger.info(speech_data)
         answer = ""
         for module in self.modules:
             if module.is_requested(intent):

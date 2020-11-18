@@ -15,10 +15,7 @@ scheduler = Scheduler()
 @app.route('/intent', methods=['POST'])
 def intent_handling():
     data = request.get_json()
-    print("------------------------ REQUEST PARAM RECEIVED")
-    print(data)
-    print("------------------------------------------------")
-    return Brain(scheduler).execute_command_by_spoken_words(data['intent']['name'], data['text'])
+    return Brain(scheduler).execute_command_by_spoken_words(data)
 
 @app.route('/health')
 def health():
