@@ -5,6 +5,7 @@ from fritzconnection.lib.fritzhosts import FritzHosts
 import logging
 from library.Configuration import Configuration
 from library.Persistence import Persistence
+from library.Frontend import Frontend
 
 
 class FritzBox:
@@ -19,13 +20,38 @@ class FritzBox:
             password = config.fritzbox_password()
             fh = FritzHosts(address=ip, password=password)
             hosts = fh.get_hosts_info()
-            presence = []
+            current_presence = {}
             for index, host in enumerate(hosts, start=1):
                 if host['name'] == "HandyBabs":
-                    presence.append({'name': 'barbara', 'status': host['status']})
+                    current_presence['barbara'] = host['status']
                 elif host['name'] == "iPhoneChristoph":
-                    presence.append({'name': 'christoph', 'status': host['status']})
-            Persistence.persist('presence', presence)
+                    current_presence['christoph'] = host['status']
+            
+            # FANCY STUFF - TELL FRONTEND WHEN STATE CHANGES
+            sentence = ''
+            try:
+                old_presence = Persistence.read('presence')
+            except Exception as e:
+                # First time run so we have no presence - take default one
+                old_presence = {'barbara': False, 'christoph': False}
+
+            if old_presence['barbara'] != current_presence['barbara']:
+                sentence += 'Barbara '
+                if current_presence['barbara']:
+                    sentence += 'kommt gerade nach Hause!'
+                else:
+                    sentence += 'verlässt gerade das Haus!'
+            elif old_presence['christoph'] != current_presence['christoph']:
+                sentence += 'Christoph '
+                if current_presence['christoph']:
+                    sentence += 'kommt gerade nach Hause!'
+                else:
+                    sentence += 'verlässt gerade das Haus!'
+            if len(sentence) > 1:
+                Frontend().say(sentence)
+            # FANCY STUFF ENDED
+
+            Persistence.persist('presence', current_presence)
         except Exception as e:
             logger.error("Error: %s. Cannot get fritzbox api." % e)
-            Persistence.persist('presence',  {})
+            Persistence.persist('presence',  {'barbara': False, 'christoph': False})

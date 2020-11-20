@@ -60,3 +60,6 @@ class Configuration:
 
     def fritzbox_password(self):
         return os.getenv('FRITZBOX_PASSWORD') 
+
+    def frontend_host(self):
+        return os.getenv('FRONTEND_HOST')

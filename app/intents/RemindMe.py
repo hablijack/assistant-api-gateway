@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import requests
+from library.Frontend import Frontend
 
 
 def handle(text, slots, background_jobs):
@@ -25,10 +25,7 @@ def handle(text, slots, background_jobs):
 def execute_timer(background_jobs, identifier, hour, minute):
     logger = logging.getLogger('ActiveTimer')
     logger.info("... it is time for our reminder: EXECUTE IT")
-
-    url = 'http://192.168.178.52:12101/api/text-to-speech'
-    x = requests.post(url, data = 'Achtung! Es ist jetzt: ' + str(hour) + ':' + str(minute) + ' Uhr! Hier deine Erinnerung.')
-
+    Frontend().say('Achtung! Es ist jetzt ' + str(hour) + ':' + str(minute) + ' Uhr! Hier deine Erinnerung.')
     background_jobs.scheduler.remove_job(identifier)
     logger.info("... reminder successfully executed : DELETE IT")
 
