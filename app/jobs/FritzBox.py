@@ -37,16 +37,16 @@ class FritzBox:
 
             if old_presence['barbara'] != current_presence['barbara']:
                 sentence += 'Barbara '
-                if current_presence['barbara']:
+                if current_presence['barbara'] == True:
                     sentence += 'kommt gerade nach Hause!'
                 else:
-                    sentence += 'verlässt gerade das Haus!'
+                    sentence += 'geht gerade aus dem Haus!'
             elif old_presence['christoph'] != current_presence['christoph']:
                 sentence += 'Christoph '
-                if current_presence['christoph']:
+                if current_presence['christoph'] == True:
                     sentence += 'kommt gerade nach Hause!'
                 else:
-                    sentence += 'verlässt gerade das Haus!'
+                    sentence += 'geht gerade aus dem Haus!'
             if len(sentence) > 1:
                 Frontend().say(sentence)
             # FANCY STUFF ENDED
