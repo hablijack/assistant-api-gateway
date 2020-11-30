@@ -14,7 +14,7 @@ from jobs.Teamup import Teamup
 from jobs.DarkSky import DarkSky
 from jobs.Wetteronline import Wetteronline
 from jobs.Meteoblue import Meteoblue
-from jobs.FritzBox import FritzBox
+from jobs.Telephone import Telephone
 
 
 class Scheduler():
@@ -31,7 +31,7 @@ class Scheduler():
         DarkSky.fetch() 
         Wetteronline.fetch()
         Meteoblue.fetch()
-        FritzBox.fetch()
+        Telephone.fetch()
         self.scheduler = BackgroundScheduler()
         self.register_jobs()
 
@@ -41,7 +41,7 @@ class Scheduler():
     def register_jobs(self):
         self.scheduler.add_job(ADAC.fetch, 'interval', minutes=15)
         self.scheduler.add_job(Chefkoch.fetch, 'interval', days=1)
-        self.scheduler.add_job(FritzBox.fetch, 'interval', seconds=30)
+        self.scheduler.add_job(Telephone.fetch, 'interval', minutes=5)
         self.scheduler.add_job(Pollenflug.fetch, 'interval', minutes=30)
         self.scheduler.add_job(Posteo.fetch, 'interval', minutes=2)
         self.scheduler.add_job(Sueddeutsche.fetch, 'interval', minutes=20)
