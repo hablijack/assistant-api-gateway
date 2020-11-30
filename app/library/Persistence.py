@@ -3,8 +3,14 @@
 
 import json
 import pathlib
+import os.path
+
 
 class Persistence():
+
+    @staticmethod
+    def cache_exists(id):
+        return os.path.isfile(str(pathlib.Path(__file__).parent.absolute()) +'/../cache/' + id + '.json') 
 
     @staticmethod
     def persist(id, data):
