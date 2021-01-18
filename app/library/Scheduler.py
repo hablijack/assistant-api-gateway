@@ -11,9 +11,9 @@ from jobs.Sueddeutsche import Sueddeutsche
 from jobs.Tagesschau import Tagesschau
 from jobs.Tankerkoenig import Tankerkoenig
 from jobs.Teamup import Teamup
-from jobs.DarkSky import DarkSky
-from jobs.Wetteronline import Wetteronline
-from jobs.Meteoblue import Meteoblue
+
+from jobs.Maschinenring import Maschinenring
+
 from jobs.Telephone import Telephone
 
 
@@ -28,9 +28,7 @@ class Scheduler():
         Tagesschau.fetch()
         Tankerkoenig.fetch()
         Teamup.fetch()
-        DarkSky.fetch() 
-        Wetteronline.fetch()
-        Meteoblue.fetch()
+        Maschinenring.fetch()
         Telephone.fetch()
         self.scheduler = BackgroundScheduler()
         self.register_jobs()
@@ -48,6 +46,4 @@ class Scheduler():
         self.scheduler.add_job(Tagesschau.fetch, 'interval', hours=4)
         self.scheduler.add_job(Tankerkoenig.fetch, 'interval', hours=1)
         self.scheduler.add_job(Teamup.fetch, 'interval', minutes=10)
-        self.scheduler.add_job(DarkSky.fetch, 'interval', hours=2)
-        self.scheduler.add_job(Wetteronline.fetch, 'interval', hours=2)
-        self.scheduler.add_job(Meteoblue.fetch, 'interval', hours=2)
+        self.scheduler.add_job(Maschinenring.fetch, 'interval', hours=2)
