@@ -22,7 +22,13 @@ def handle(text, slots, scheduler):
     elif "morgen" in text:
         day_text = 'morgen'
         for day in maschinenring['weather']:
-            if datetime.fromtimestamp(day['day']).date() == datetime.now().date() + exitimedelta(days=1):
+            if datetime.fromtimestamp(day['day']).date() == datetime.now().date() + timedelta(days=1):
+                requested_day = day
+                break
+    elif "morgen" in text:
+        day_text = 'übermorgen'
+        for day in maschinenring['weather']:
+            if datetime.fromtimestamp(day['day']).date() == datetime.now().date() + timedelta(days=2):
                 requested_day = day
                 break
     answer = ('Das Wetter in Waldershof wird ' 
