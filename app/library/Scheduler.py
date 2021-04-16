@@ -11,10 +11,9 @@ from jobs.Sueddeutsche import Sueddeutsche
 from jobs.Tagesschau import Tagesschau
 from jobs.Tankerkoenig import Tankerkoenig
 from jobs.Teamup import Teamup
-
 from jobs.Maschinenring import Maschinenring
-
 from jobs.Telephone import Telephone
+from jobs.CoronaIncident import CoronaIncident
 
 
 class Scheduler():
@@ -30,6 +29,7 @@ class Scheduler():
         Teamup.fetch()
         Maschinenring.fetch()
         Telephone.fetch()
+        CoronaIncident.fetch()
         self.scheduler = BackgroundScheduler()
         self.register_jobs()
 
@@ -47,3 +47,4 @@ class Scheduler():
         self.scheduler.add_job(Tankerkoenig.fetch, 'interval', hours=1)
         self.scheduler.add_job(Teamup.fetch, 'interval', minutes=10)
         self.scheduler.add_job(Maschinenring.fetch, 'interval', hours=2)
+        self.scheduler.add_job(CoronaIncident.fetch, 'interval', hours=1)
